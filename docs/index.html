@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uncontained Living</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Garamond, serif;
+            font-size: 18pt;
+            line-height: 1.6;
+            background: var(--white);
+            color: var(--black);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {#ce7e00
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        /* Color Variables */
+        :root {
+            --purple: #86069e;
+            --purple-light: #c206e4;
+            --green: #15803d;
+            --green-light: #8ced62;
+            --yellow: #eab308;
+            --yellow-light: #facc15;
+            --black: #111;
+            --white: #fff;
+            --gray: #f5f5f5;
+            --gray-dark: #333;
+            --red: #e3381e;
+            --green-dark: #3c693a;
+            --blue-light: #85c9fc;
+            --blue: #329ff1;
+            --green-g: #317016;
+            --orange: #ce7e00;
+            --gold: #ffd700;
+            
+            
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            color: var(--yellow-light);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        .logo-icon {
+            color: var(--green);
+            font-size: 2.5rem;
+        }
+        
+        .logo-text {
+            color: var(--green);
+        }
+        
+        /* Navigation */
+        nav.desktop-nav {
+            display: none;
+        }
+        
+        nav.desktop-nav a {
+            margin-left: 25px;
+            transition: color 0.3s ease;
+        }
+        
+        nav.desktop-nav a:hover {
+            color: var(--yellow-light);
+        }
+        
+        .login-btn {
+            background-color: var(--purple);
+            padding: 8px 20px;
+            border-radius: 4px;
+            margin-left: 25px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .login-btn:hover {
+            background-color: var(--purple-light);
+        }
+        
+        .mobile-menu-btn {
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: block;
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: var(--black);
+        }
+        
+        .mobile-menu.active {
+            max-height: 300px;
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 12px 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-menu a:hover {
+            color: var(--green-light);
+        }
+        
+        .mobile-menu .login-btn {
+            margin: 10px 20px;
+            display: block;
+            text-align: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: var(--yellow-light);
+            color: var(--black);
+            padding: 60px 0;
+        }
+        
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .hero-content {
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-text {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .btn-primary {
+            background-color: var(--green-light);
+            color: var(--black);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--red);
+        }
+        
+        .btn-secondary {
+            background-color: var(--black);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--purple);
+        }
+        
+        .hero-image {
+            border-radius: 8px;
+        }
+        
+        /* Features Section */
+        .features {
+            background: var(--gray);
+            color: var(--black);
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1px;
+            color: var(--black);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--red-light);
+            padding: 30px;
+            border-radius: 1.5px;
+            box-shadow: 6px 6px 6px 6px rgba(1, 1, 1, 1);
+            border-left: 6px solid var(--blue);
+        }
+        
+        .feature-card.green {
+            border-color: var(--green);
+        }
+        
+        .feature-card.yellow {
+            border-color: var(--yellow);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon.purple {
+            color: var(--purple);
+        }
+        
+        .feature-icon.green {
+            color: var(--green);
+        }
+        
+        .feature-icon.yellow {
+            color: var(--yellow);
+        }
+        
+        .feature-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, var(--green) 0%, var(--green) 50%, var(--yellow) 100%);
+            color: var(--white);
+            padding: 60px 0;
+        }
+        
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .about-title {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+        
+        .about-note {
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        /* Comments Section */
+        .comments {
+            padding: 60px 0;
+            background-color: var(--green);
+        }
+        
+        .comments-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .comment-form {
+            margin-bottom: 30px;
+        }
+        
+        .form-title {
+            font-size: 2.0rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--black);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .form-input-text {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            margin-bottom: 15px;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            margin-bottom: 15px;
+            min-height: 120px;
+        }
+        
+        .submit-btn {
+        	font-weight: bold;
+        	font-size: 1.7rem;
+            background-color: var(--green-dark);
+            color: var(--white);
+            padding: 25px 40px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--green-light);
+        }
+        
+        .comments-list {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .comment {
+            background-color: var(--white);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: var(--black);
+        }
+                
+        .comment-date {
+        	font-weight: bold;
+            color: var(--black);
+            font-size: 1.3rem;
+        }
+              
+        /* Contact Section */
+        .contact {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-form {
+            background-color: var(--blue-light);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info {
+            background-color: var(--green);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .info-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .info-content h4 {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 40px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column.about h3 {
+            color: var(--purple-light);
+        }
+        
+        .footer-column.links h3 {
+            color: var(--green-light);
+        }
+        
+        .footer-column.legal h3 {
+            color: var(--yellow);
+        }
+        
+        .footer-column.newsletter h3 {
+            color: var(--purple-light);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .footer-badges {
+            display: flex;
+            gap: 15px;
+        }
+        
+ </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-icon"><b><u>YDOC</u></b></span> |</span>
+                <span class="logo-text"><b><u>SITE</u></b></span>
+            </a>
+            
+            <nav class="desktop-nav">
+                <a href="index.html">HOME</a>
+                <a href="about.html">ABOUT</a>
+                <a href="projects.html">PROJECTS</a>
+                <a href="stuff.html">STUFF</a>
+                <a href="contact.html">CONTACT</a>
+            </nav>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+        
+        <div class="mobile-menu">
+             <a href="index.html">Home</a>
+             <a href="about.html">About Us</a>
+             <a href="projects.html">Projects</a>
+             <a href="store.html">Store</a>
+             <a href="contact.html">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">ftgh</h1>
+                <p class="hero-text">
+					<center><b><u>Business & Personal Signs</u></b></center><br>
+                <center><b><u>Wall Art</b></u></center><br>
+                <center><b><u>Picture Frames</b></u></center><br>
+                <center><b><u>Kutting Boards</b></u></center><br>
+                <center><b><u>Plus More!</b></u></center><br>
+                </p>
+                <center><div class="hero-btns">
+                    <a href="make.html" class="btn btn-secondary">Kreate Your Own Design</a>
+                </div></center>
+            </div>
+            <div class="hero-image">
+                <img src= knights1.jpg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title"></h2>
+            <div class="features-grid">
+                <div class="feature-card purple">
+                    <center><h1 class="feature-title">Solid Surface<hr></h1></center>
+                    <center><p><b>Multiple Options of Colors and Brands of Solid Surface to Choose From<b></p></center>
+               </div>
+                <div class="feature-card green">
+                    <center><h1 class="feature-title">Softwoods & Hardwoods<hr></h1></center>
+                    <center><p><b><u>Oak</u></b><br></center>
+                    <center><p><b><u>Cherry</u></b><br></center>
+                    <center><p><b><u>Maple</u></b><br></center>
+                    <center><p><b><u>Alder</u></b><br></center>
+                    <center><p><b><u>Poplar</u></b><br></center>
+                    <center><p><b><u>Walnut</u></b><br></center>
+                    <center><p><b><u>Mahogany</u></b><br></center>
+                    <center><p><b><u>MDF & HDF</u></b><br></center>
+                    <center><p><b><u>And Much More Domestics & Exotics</u></b><br></center>
+                    </p>
+                </div>
+                <br>
+                <div class="feature-card yellow">
+                    <h1 class="feature-title"><hr>WE CAN SHAPE MOST MATERIALS TO FIT YOUR NEEDS</h1>
+                </div>
+            </div>
+        </div>
+       <br>
+    <!-- Comments Section -->
+    <section class="comments">
+        <div class="container">
+            <div class="comments-container">
+                <!-- Comment Form -->
+                <form class="comment-form" id="comment-form">
+                    <h3 class="form-title">Add Your Comment</h3>
+                    <div class="form-group">
+                        <label for="comment-name" class="form-label">Name</label>
+                        <input type="text" id="comment-name" required class="form-input-text">
+                    </div>
+                    <div class="form-group">
+                        <label for="comment-text" class="form-label">Comment</label>
+                        <textarea id="comment-text" required class="form-textarea"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Post Comment</button>
+                </form>
+                
+                <!-- Comments List -->
+                <div class="comments-list" id="comments-container">
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author purple">Rafiki</span>
+                            <span class="comment-date">May 28, 2025</span>
+                        </div>
+                        <p>Asante sana Squash banana, Wiwi nugu Mi mi apana, A-doo de doo da doo ke de doo.
+                        Can't cut it out, it'll grow right back.</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author green">Timon</span>
+                            <span class="comment-date">March 9, 2025</span>
+                        </div>
+                        <p>If you're hungry for a hunk of fat and juicy meat, eat my buddy Pumbaa here 'cause he is a treat!</p>
+                    </div>
+                    
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author yellow">Fred G. Sanford</span>
+                            <span class="comment-date">May 15, 2023</span>
+                        </div>
+                        <p>I'm coming Elizabeth!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="contact-container">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <h3 class="form-title">Send Us a Message</h3>
+                        
+                        <div class="form-group">
+                            <label for="contact-name" class="form-label">Name</label>
+                            <input type="text" id="contact-name" required class="form-input-text">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Email</label>
+                            <input type="email" id="contact-email" required class="form-input-text">
+                        </div>
+                        
+                        
+                        <div class="form-group">
+                            <label for="contact-message" class="form-label">Message</label>
+                            <textarea id="contact-message" required class="form-textarea"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                    
+                    <div class="success-message" id="contact-success">
+                        <span>✓</span> Your message has been sent successfully! We'll respond within 2 business days.
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h3 class="info-title">Our Information</h3>
+                    <div class="info-item">
+                        <div class="info-content">
+                            <h2><b><u>Address</u></b></h2>
+                            <p>Everything the Light Touches<br>Pride Rock</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-content">
+                            <h2><b><u>Phone</u></b></h2>
+                            <center><p>555-1963</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-content">
+                            <h2><u><b>Email</u></b></h2>
+                            <p>KEVINKARES@CNC.com<br>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-content">
+                            <h2><u><b>Hours</u></b></h2>
+                            <p>Monday-Friday: 9:00 AM - 5:00 PM EST<br>Weekends: Closed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <h4 class="social-title">Follow Us</h4>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon facebook">Facebook</a>
+                            <a href="#" class="social-icon twitter">Twitter</a>
+                            <a href="#" class="social-icon instagram">Instagram</a>
+                            <a href="#" class="social-icon youtube">Youtube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+              
+                
+                <!-- Quick Links -->
+                <div class="footer-column links">
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#documents">Projects</a></li>
+                        <li><a href="#links">Store</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+                
+               
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kevin's Kustom Kustom Krafts. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="back-to-top">↑</div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Newsletter Form Submission
+        const newsletterForm = document.getElementById('newsletter-form');
+        const newsletterSuccess = document.getElementById('newsletter-success');
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real application, you would send the data to a server here
+            newsletterForm.reset();
+            newsletterSuccess.style.display = 'flex';
+            setTimeout(() => {
+                newsletterSuccess.style.display = 'none';
+            }, 5000);
+        });
+        
+        // Contact Form Submission
+        const contactForm = document.getElementById('contact-form');
+        const contactSuccess = document.getElementById('contact-success');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real application, you would send the data to a server here
+            contactForm.reset();
+            contactSuccess.style.display = 'flex';
+            setTimeout(() => {
+                contactSuccess.style.display = 'none';
+            }, 5000);
+        });
+        
+        // Comment Form Submission
+        const commentForm = document.getElementById('comment-form');
+        const commentsContainer = document.getElementById('comments-container');
+        
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('comment-name').value;
+            const text = document.getElementById('comment-text').value;
+            const now = new Date();
+            const dateString = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            
+            const colors = ['purple', 'green', 'yellow', 'blue'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            const commentHTML = `
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author ${randomColor}">${name}</span>
+                        <span class="comment-date">${dateString}</span>
+                    </div>
+                    <p>${text}</p>
+                </div>
+            `;
+            
+            commentsContainer.insertAdjacentHTML('afterbegin', commentHTML);
+            commentForm.reset();
+            
+            // Scroll to the new comment
+            commentsContainer.scrollTop = 0;
+        });
+        
+        // Document Filtering
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const documentContainer = document.getElementById('document-container');
+        
+        // Sample documents data
+        const documents = [
+            {
+                title: "Understanding Government Structure",
+                description: "Comprehensive guide to the three branches of government and their functions.",
+                category: "government",
+                type: "PDF",
+                size: "2.4 MB",
+                download: "#"
+            },
+            {
+                title: "Data Protection Handbook",
+                description: "Step-by-step instructions for securing your personal information online.",
+                category: "data",
+                type: "PDF",
+                size: "1.8 MB",
+                download: "#"
+            },
+            {
+                title: "Financial Rights Guide",
+                description: "Know your rights when dealing with banks, creditors, and financial institutions.",
+                category: "finance",
+                type: "PDF",
+                size: "3.1 MB",
+                download: "#"
+            },
+            {
+                title: "FOIA Request Form",
+                description: "Official form for requesting government documents under the Freedom of Information Act.",
+                category: "forms",
+                type: "DOC",
+                size: "0.5 MB",
+                download: "#"
+            },
+            {
+                title: "Correcting Credit Report Errors",
+                description: "Template letters and instructions for disputing inaccuracies in your credit report.",
+                category: "finance",
+                type: "PDF",
+                size: "1.2 MB",
+                download: "#"
+            },
+            {
+                title: "Local Government Directory",
+                description: "Contact information for all local government offices in your area.",
+                category: "government",
+                type: "PDF",
+                size: "4.0 MB",
+                download: "#"
+            }
+        ];
+        
+        // Display all documents initially
+        displayDocuments(documents);
+        
+        // Filter documents by category
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.dataset.category;
+                
+                // Update active button styling
+                categoryButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                
+                if (category === 'all') {
+                    displayDocuments(documents);
+                } else {
+                    const filteredDocs = documents.filter(doc => doc.category === category);
+                    displayDocuments(filteredDocs);
+                }
+            });
+        });
+        
+        // Function to display documents
+        function displayDocuments(docs) {
+            documentContainer.innerHTML = '';
+            
+            docs.forEach(doc => {
+                let categoryClass = '';
+                let categoryText = '';
+                
+                switch(doc.category) {
+                    case 'government':
+                        categoryClass = 'purple';
+                        categoryText = 'Government';
+                        break;
+                    case 'data':
+                        categoryClass = 'green';
+                        categoryText = 'Data';
+                        break;
+                    case 'finance':
+                        categoryClass = 'yellow';
+                        categoryText = 'Finance';
+                        break;
+                    case 'forms':
+                        categoryClass = 'gray';
+                        categoryText = 'Forms';
+                        break;
+                }
+                
+                const docHTML = `
+                    <div class="document-card" onclick="openDocumentModal('${doc.title}', '${doc.description}', '${categoryClass}', '${categoryText}', '${doc.download}')">
+                        <div class="document-content">
+                            <div class="document-header">
+                                <h3 class="document-title">${doc.title}</h3>
+                                <span class="document-type">${doc.type}</span>
+                            </div>
+                            <p class="document-description">${doc.description}</p>
+                            <div class="document-footer">
+                                <span class="document-category ${categoryClass}">${categoryText}</span>
+                                <span class="document-size">${doc.size}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                documentContainer.insertAdjacentHTML('beforeend', docHTML);
+            });
+        }
+        
+        // Document Modal
+        const documentModal = document.getElementById('document-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const modalCategory = document.getElementById('modal-category');
+        const downloadLink = document.getElementById('download-link');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // Global function to open modal
+        window.openDocumentModal = function(title, content, categoryClass, categoryText, download) {
+            modalTitle.textContent = title;
+            modalContent.textContent = content;
+            modalCategory.textContent = categoryText;
+            modalCategory.className = `document-category ${categoryClass}`;
+            downloadLink.href = download;
+            
+            documentModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        
+        closeModal.addEventListener('click', () => {
+            documentModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside
+        documentModal.addEventListener('click', (e) => {
+            if (e.target === documentModal) {
+                documentModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
