@@ -432,42 +432,143 @@
         <p>&copy; 2025 ydoc.site | Educational Resource for U.S. History & Legal Studies</p>
     </footer>
     
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Documents Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .document-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .document-title {
+            font-size: 1.4em;
+            color: #0056b3;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+        .document-title:hover {
+            text-decoration: underline;
+        }
+        .document-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .document-image {
+            max-width: 100%;
+            height: auto;
+            /* Key CSS: starts hidden */
+            display: none; 
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        /* Class added by JavaScript to make the image visible */
+        .document-image.expanded {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>U.S. Foundational Documents</h1>
+    
+    <div id="gallery-container">
+        </div>
+
     <script>
+        
         const documents = [
             {
                 title: "Declaration of Independence (1776)",
                 description: "The foundational document declaring independence from Great Britain, asserting natural rights and the principles of self-governance.",
-                img: "data:Declaration_Pg1of1_AC.jpg viewBox='0 0 800 1000'%3E%3Crect fill='%23f4e8d0' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='36' fill='%23654321' font-family='serif' font-weight='bold'%3EIN CONGRESS, July 4, 1776%3C/text%3E%3Ctext x='50%25' y='15%25' text-anchor='middle' font-size='28' fill='%23654321' font-family='serif'%3EThe unanimous Declaration%3C/text%3E%3Ctext x='50%25' y='19%25' text-anchor='middle' font-size='28' fill='%23654321' font-family='serif'%3Eof the thirteen united States of America%3C/text%3E%3Ctext x='10%25' y='28%25' font-size='16' fill='%23654321' font-family='serif'%3EWhen in the Course of human events, it becomes necessary for one%3C/text%3E%3Ctext x='10%25' y='31%25' font-size='16' fill='%23654321' font-family='serif'%3Epeople to dissolve the political bands which have connected them with%3C/text%3E%3Ctext x='10%25' y='34%25' font-size='16' fill='%23654321' font-family='serif'%3Eanother, and to assume among the powers of the earth...%3C/text%3E%3Cpath d='M100 400 Q400 380 700 400' stroke='%23654321' fill='none' stroke-width='2'/%3E%3C/svg%3E"
+                img: "data:image/svg+xml;charset=utf-8,Declaration_Pg1of1_AC.jpg' viewBox='0 0 800 1000'%3E%3Crect fill='%23f4e8d0' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='36' fill='%23654321' font-family='serif' font-weight='bold'%3EIN CONGRESS, July 4, 1776%3C/text%3E%3Ctext x='50%25' y='15%25' text-anchor='middle' font-size='28' fill='%23654321' font-family='serif'%3EThe unanimous Declaration%3C/text%3E%3Ctext x='50%25' y='19%25' text-anchor='middle' font-size='28' fill='%23654321' font-family='serif'%3Eof the thirteen united States of America%3C/text%3E%3Ctext x='10%25' y='28%25' font-size='16' fill='%23654321' font-family='serif'%3EWhen in the Course of human events, it becomes necessary for one%3C/text%3E%3Ctext x='10%25' y='31%25' font-size='16' fill='%23654321' font-family='serif'%3Epeople to dissolve the political bands which have connected them with%3C/text%3E%3Ctext x='10%25' y='34%25' font-size='16' fill='%23654321' font-family='serif'%3Eanother, and to assume among the powers of the earth...%3C/text%3E%3Cpath d='M100 400 Q400 380 700 400' stroke='%23654321' fill='none' stroke-width='2'/%3E%3C/svg%3E"
             },
             {
                 title: "Constitution for the United States of America (Page 1) (1787)",
                 description: "The supreme law of the United States, establishing the framework of the federal government and fundamental rights.",
-                img: "data:Constitution_Pg1of4_AC.jpg viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3E%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
+                img: "data:image/svg+xml;charset=utf-8,Constitution_Pg1of4_AC.jpg' viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3E%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
             },
-             {
+            {
                 title: "Constitution for the United States of America (Page 2) (1787)",
                 description: "The supreme law of the United States, establishing the framework of the federal government and fundamental rights.",
-                img: "data:Constitution_Pg2of4_AC.jpg viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3E%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
+                img: "data:image/svg+xml;charset=utf-8,Constitution_Pg2of4_AC.jpg' viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3E%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
             },
-              {
+            {
                 title: "Constitution for the United States of America (Page 3) (1787)",
                 description: "The supreme law of the United States, establishing the framework of the federal government and fundamental rights.",
-                img: "data:Constitution_Pg3of4_AC.jpg viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3E%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
+                img: "data:image/svg+xml;charset=utf-8,Constitution_Pg3of4_AC.jpg' viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3C%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
             },
-              {
+            {
                 title: "Constitution for the United States of America (Page 4) (1787)",
                 description: "The supreme law of the United States, establishing the framework of the federal government and fundamental rights.",
-                img: "data:Constitution_Pg4of4_AC.jpg viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3E%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
+                img: "data:image/svg+xml;charset=utf-8,Constitution_Pg4of4_AC.jpg' viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3E%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
             },
             {
                 title: "Bill of Rights (1791)",
                 description: "The first ten amendments to the Constitution, protecting individual liberties and limiting government power.",
-                img: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect fill='%23f0e6d2' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='38' fill='%23654321' font-family='serif' font-weight='bold'%3EBILL OF RIGHTS%3C/text%3E%3Ctext x='50%25' y='14%25' text-anchor='middle' font-size='20' fill='%23654321' font-family='serif'%3EAmendments I-X%3C/text%3E%3Ctext x='10%25' y='22%25' font-size='16' fill='%23654321' font-family='serif' font-weight='bold'%3EAmendment I%3C/text%3E%3Ctext x='10%25' y='25%25' font-size='14' fill='%23654321' font-family='serif'%3ECongress shall make no law respecting an establishment of religion...%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='16' fill='%23654321' font-family='serif' font-weight='bold'%3EAmendment II%3C/text%3E%3Ctext x='10%25' y='35%25' font-size='14' fill='%23654321' font-family='serif'%3EA well regulated Militia, being necessary to the security...%3C/text%3E%3C/svg%3E"
+                img: "data:image/svg+xml;charset=utf-8,bill-of-rights-xl.jpg' viewBox='0 0 800 1000'%3E%3Crect fill='%23f0e6d2' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='38' fill='%23654321' font-family='serif' font-weight='bold'%3EBILL OF RIGHTS%3C/text%3E%3Ctext x='50%25' y='14%25' text-anchor='middle' font-size='20' fill='%23654321' font-family='serif'%3EAmendments I-X%3C/text%3E%3Ctext x='10%25' y='22%25' font-size='16' fill='%23654321' font-family='serif' font-weight='bold'%3EAmendment I%3C/text%3E%3Ctext x='10%25' y='25%25' font-size='14' fill='%23654321' font-family='serif'%3ECongress shall make no law respecting an establishment of religion...%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='16' fill='%23654321' font-family='serif' font-weight='bold'%3EAmendment II%3C/text%3E%3Ctext x='10%25' y='35%25' font-size='14' fill='%23654321' font-family='serif'%3EA well regulated Militia, being necessary to the security...%3C/text%3E%3C/svg%3E"
             },
             {
                 title: "Articles of Confederation (1781)",
                 description: "The first constitution of the United States, establishing a confederation of sovereign states.",
-                img: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect fill='%23ede4c8' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='32' fill='%23654321' font-family='serif' font-weight='bold'%3EArticles of Confederation%3C/text%3E%3Ctext x='50%25' y='14%25' text-anchor='middle' font-size='24' fill='%23654321' font-family='serif'%3Eand Perpetual Union%3C/text%3E%3Ctext x='10%25' y='22%25' font-size='16' fill='%23654321' font-family='serif'%3EArticle I. The Stile of this Confederacy shall be%3C/text%3E%3Ctext x='10%25' y='25%25' font
+                img: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect fill='%23ede4c8' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='32' fill='%23654321' font-family='serif' font-weight='bold'%3EArticles of Confederation%3C/text%3E%3Ctext x='50%25' y='14%25' text-anchor='middle' font-size='24' fill='%23654321' font-family='serif'%3Eand Perpetual Union%3C/text%3E%3Ctext x='10%25' y='22%25' font-size='16' fill='%23654321' font-family='serif'%3EArticle I. The Stile of this Confederacy shall be%3C/text%3E%3Ctext x='10%25' y='25%25' font-size='16' fill='%23654321' font-family='serif'%3E“The United States of America.”%3C/text%3E%3C/svg%3E"
             }
-        ]
+        ];
+        // --- End of Corrected Data Array ---
+
+        const container = document.getElementById('gallery-container');
+
+        documents.forEach((doc, index) => {
+            // 1. Create the main card container
+            const card = document.createElement('div');
+            card.className = 'document-card';
+
+            // 2. Create the clickable title
+            const title = document.createElement('h2');
+            title.className = 'document-title';
+            title.textContent = doc.title;
+            
+            // Assign a unique ID to the image for easy targeting
+            const imageId = `doc-img-${index}`;
+
+            // 3. Create the description
+            const description = document.createElement('p');
+            description.className = 'document-description';
+            description.textContent = doc.description;
+
+            // 4. Create the image element (initially hidden by CSS)
+            const image = document.createElement('img');
+            image.id = imageId;
+            image.className = 'document-image';
+            // The image source is the data URI from your array.
+            image.src = doc.img; 
+            image.alt = doc.title + " preview";
+
+            // 5. Add the click handler to the title
+            title.addEventListener('click', () => {
+                // Toggle the 'expanded' class on the image element
+                image.classList.toggle('expanded');
+            });
+
+            // 6. Append all elements to the card and the card to the container
+            card.appendChild(title);
+            card.appendChild(description);
+            card.appendChild(image);
+            container.appendChild(card);
+        });
     </script>
+
+</body>
+</html>
