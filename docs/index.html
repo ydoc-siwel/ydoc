@@ -1,1 +1,455 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ydoc.site - U.S. Historical Documents & Legal Resources</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e4e4e4;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #c9a961;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #c9a961;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #e4e4e4;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #c9a961;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c9a961;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23c9a961" opacity="0.1" width="1200" height="600"/><text x="50%" y="50%" font-size="120" fill="%23c9a961" opacity="0.05" text-anchor="middle" dominant-baseline="middle" font-family="Georgia">1776</text></svg>');
+            background-size: cover;
+            background-position: center;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            color: #c9a961;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #e4e4e4;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section {
+            margin-bottom: 4rem;
+            background: rgba(30, 30, 50, 0.8);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .section h2 {
+            color: #c9a961;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #c9a961;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section h3 {
+            color: #d4b876;
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .link-card {
+            background: rgba(20, 20, 40, 0.9);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(201, 169, 97, 0.4);
+            transition: all 0.3s;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            border-color: #c9a961;
+            box-shadow: 0 8px 25px rgba(201, 169, 97, 0.3);
+        }
+        
+        .link-card h4 {
+            color: #c9a961;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .link-card a {
+            color: #88b3ff;
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+            transition: color 0.3s;
+        }
+        
+        .link-card a:hover {
+            color: #c9a961;
+            text-decoration: underline;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            background: rgba(20, 20, 40, 0.9);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid rgba(201, 169, 97, 0.4);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: #c9a961;
+            box-shadow: 0 10px 30px rgba(201, 169, 97, 0.4);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .gallery-item .caption {
+            padding: 1rem;
+            color: #e4e4e4;
+            font-size: 0.95rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border: 3px solid #c9a961;
+            border-radius: 5px;
+        }
+        
+        .modal-caption {
+            color: #c9a961;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #c9a961;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .close-modal:hover {
+            background: rgba(201, 169, 97, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        footer {
+            background: rgba(15, 15, 30, 0.95);
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid #c9a961;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            color: #c9a961;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            nav {
+                gap: 1rem;
+            }
+            
+            .section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">ydoc.site</div>
+            <nav>
+                <a href="#history">History</a>
+                <a href="#legal">Legal Resources</a>
+                <a href="#gallery">Document Gallery</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="hero">
+        <h1>Historical Documents & Legal Resources</h1>
+        <p>Explore the foundational documents and legal codes that shaped the United States</p>
+    </div>
+    
+    <div class="container">
+        <section id="history" class="section">
+            <h2>True History of the United States</h2>
+            <p>The United States was founded on principles of liberty, self-governance, and the rule of law. The founding documents established a constitutional republic with separation of powers, federalism, and protection of individual rights.</p>
+            
+            <h3>Key Historical Facts</h3>
+            <p><strong>Declaration of Independence (1776):</strong> Proclaimed the thirteen American colonies' separation from Great Britain, asserting natural rights to "life, liberty, and the pursuit of happiness."</p>
+            
+            <p><strong>Articles of Confederation (1781-1789):</strong> The first constitution, which created a loose confederation of sovereign states with a weak central government.</p>
+            
+            <p><strong>U.S. Constitution (1787):</strong> Ratified in 1788, it established the federal government structure we know today, with three branches: legislative, executive, and judicial.</p>
+            
+            <p><strong>Bill of Rights (1791):</strong> The first ten amendments to the Constitution, protecting fundamental individual liberties including freedom of speech, religion, press, and the right to due process.</p>
+            
+            <h3>Constitutional Framework</h3>
+            <p>The Constitution created a system of checks and balances where no single branch could dominate. It also established federalism - a division of power between the federal government and state governments, each with distinct authorities and responsibilities.</p>
+        </section>
+        
+        <section id="legal" class="section">
+            <h2>Legal Code Resources</h2>
+            
+            <div class="links-grid">
+                <div class="link-card">
+                    <h4>Federal Resources</h4>
+                    <a href="https://uscode.house.gov/" target="_blank">United States Code (USC)</a>
+                    <a href="https://www.law.cornell.edu/rules/frcp" target="_blank">Federal Rules of Civil Procedure</a>
+                    <a href="https://www.law.cornell.edu/rules/fre" target="_blank">Federal Rules of Evidence</a>
+                    <a href="https://www.law.cornell.edu/rules/frcrimP" target="_blank">Federal Rules of Criminal Procedure</a>
+                    <a href="https://www.uscourts.gov/rules-policies/current-rules-practice-procedure" target="_blank">Federal Rules (Official)</a>
+                </div>
+                
+                <div class="link-card">
+                    <h4>Utah Legal Resources</h4>
+                    <a href="https://le.utah.gov/xcode/code.html" target="_blank">Utah Code</a>
+                    <a href="https://www.utcourts.gov/rules/" target="_blank">Utah Rules of Court</a>
+                    <a href="https://www.utcourts.gov/rules/view.php?type=urcp" target="_blank">Utah Rules of Civil Procedure</a>
+                    <a href="https://www.utcourts.gov/rules/view.php?type=ucrp" target="_blank">Utah Rules of Criminal Procedure</a>
+                    <a href="https://www.utcourts.gov/rules/view.php?type=ure" target="_blank">Utah Rules of Evidence</a>
+                </div>
+                
+                <div class="link-card">
+                    <h4>Massachusetts Legal Resources</h4>
+                    <a href="https://malegislature.gov/Laws/GeneralLaws" target="_blank">Massachusetts General Laws</a>
+                    <a href="https://www.mass.gov/info-details/massachusetts-rules-of-court" target="_blank">Massachusetts Rules of Court</a>
+                    <a href="https://www.mass.gov/rules-of-civil-procedure" target="_blank">Massachusetts Rules of Civil Procedure</a>
+                    <a href="https://www.mass.gov/rules-of-criminal-procedure" target="_blank">Massachusetts Rules of Criminal Procedure</a>
+                </div>
+                
+                <div class="link-card">
+                    <h4>Historical Document Archives</h4>
+                    <a href="https://www.archives.gov/founding-docs" target="_blank">National Archives - Founding Documents</a>
+                    <a href="https://www.loc.gov/collections/" target="_blank">Library of Congress Collections</a>
+                    <a href="https://www.ourdocuments.gov/" target="_blank">100 Milestone Documents</a>
+                    <a href="https://avalon.law.yale.edu/" target="_blank">Avalon Project - Historical Documents</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="gallery" class="section">
+            <h2>Historical Document Gallery</h2>
+            <p>Click on any document to view in high resolution</p>
+            
+            <div class="gallery">
+                <div class="gallery-item" onclick="openModal(0)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f4e8d0' width='400' height='300'/%3E%3Ctext x='50%25' y='30%25' text-anchor='middle' font-size='20' fill='%23654321' font-family='serif'%3EDeclaration of%3C/text%3E%3Ctext x='50%25' y='45%25' text-anchor='middle' font-size='20' fill='%23654321' font-family='serif'%3EIndependence%3C/text%3E%3Ctext x='50%25' y='60%25' text-anchor='middle' font-size='14' fill='%23654321' font-family='serif'%3EJuly 4, 1776%3C/text%3E%3Cpath d='M50 200 Q200 180 350 200' stroke='%23654321' fill='none' stroke-width='2'/%3E%3C/svg%3E" alt="Declaration of Independence">
+                    <div class="caption">Declaration of Independence (1776)</div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal(1)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23e8dcc0' width='400' height='300'/%3E%3Ctext x='50%25' y='30%25' text-anchor='middle' font-size='20' fill='%23654321' font-family='serif'%3EThe Constitution%3C/text%3E%3Ctext x='50%25' y='45%25' text-anchor='middle' font-size='16' fill='%23654321' font-family='serif'%3Eof the%3C/text%3E%3Ctext x='50%25' y='60%25' text-anchor='middle' font-size='18' fill='%23654321' font-family='serif'%3EUnited States%3C/text%3E%3Ctext x='50%25' y='75%25' text-anchor='middle' font-size='14' fill='%23654321' font-family='serif'%3E1787%3C/text%3E%3C/svg%3E" alt="U.S. Constitution">
+                    <div class="caption">U.S. Constitution (1787)</div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal(2)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f0e6d2' width='400' height='300'/%3E%3Ctext x='50%25' y='35%25' text-anchor='middle' font-size='22' fill='%23654321' font-family='serif'%3EBill of Rights%3C/text%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='14' fill='%23654321' font-family='serif'%3EAmendments I-X%3C/text%3E%3Ctext x='50%25' y='70%25' text-anchor='middle' font-size='14' fill='%23654321' font-family='serif'%3ERatified 1791%3C/text%3E%3C/svg%3E" alt="Bill of Rights">
+                    <div class="caption">Bill of Rights (1791)</div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal(3)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23ede4c8' width='400' height='300'/%3E%3Ctext x='50%25' y='30%25' text-anchor='middle' font-size='18' fill='%23654321' font-family='serif'%3EArticles of%3C/text%3E%3Ctext x='50%25' y='45%25' text-anchor='middle' font-size='18' fill='%23654321' font-family='serif'%3EConfederation%3C/text%3E%3Ctext x='50%25' y='65%25' text-anchor='middle' font-size='14' fill='%23654321' font-family='serif'%3E1781%3C/text%3E%3C/svg%3E" alt="Articles of Confederation">
+                    <div class="caption">Articles of Confederation (1781)</div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal(4)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f2e9d5' width='400' height='300'/%3E%3Ctext x='50%25' y='30%25' text-anchor='middle' font-size='18' fill='%23654321' font-family='serif'%3EEmancipation%3C/text%3E%3Ctext x='50%25' y='45%25' text-anchor='middle' font-size='18' fill='%23654321' font-family='serif'%3EProclamation%3C/text%3E%3Ctext x='50%25' y='65%25' text-anchor='middle' font-size='14' fill='%23654321' font-family='serif'%3E1863%3C/text%3E%3C/svg%3E" alt="Emancipation Proclamation">
+                    <div class="caption">Emancipation Proclamation (1863)</div>
+                </div>
+                
+                <div class="gallery-item" onclick="openModal(5)">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23ebe2cc' width='400' height='300'/%3E%3Ctext x='50%25' y='30%25' text-anchor='middle' font-size='18' fill='%23654321' font-family='serif'%3EGettysburg%3C/text%3E%3Ctext x='50%25' y='45%25' text-anchor='middle' font-size='18' fill='%23654321' font-family='serif'%3EAddress%3C/text%3E%3Ctext x='50%25' y='65%25' text-anchor='middle' font-size='14' fill='%23654321' font-family='serif'%3ENovember 19, 1863%3C/text%3E%3C/svg%3E" alt="Gettysburg Address">
+                    <div class="caption">Gettysburg Address (1863)</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="section">
+            <h2>About This Resource</h2>
+            <p>This website serves as a comprehensive resource for understanding American history through primary source documents and legal codes. Our mission is to provide easy access to the foundational texts and current legal frameworks that govern federal and state jurisdictions.</p>
+            
+            <p>All documents and legal codes linked here are publicly available through official government sources and educational institutions. We encourage citizens to study these materials to better understand their rights, responsibilities, and the historical context of American governance.</p>
+            
+            <h3>Educational Purpose</h3>
+            <p>This site is designed for educational purposes, providing researchers, students, legal professionals, and interested citizens with direct access to authoritative sources of American law and history.</p>
+        </section>
+    </div>
+    
+    <div id="modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal(event)">&times;</span>
+            <img id="modal-img" src="" alt="Document">
+            <div class="modal-caption" id="modal-caption"></div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 ydoc.site | Educational Resource for U.S. History & Legal Studies</p>
+    </footer>
+    
+    <script>
+        const documents = [
+            {
+                title: "Declaration of Independence (1776)",
+                description: "The foundational document declaring independence from Great Britain, asserting natural rights and the principles of self-governance.",
+                img: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect fill='%23f4e8d0' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='36' fill='%23654321' font-family='serif' font-weight='bold'%3EIN CONGRESS, July 4, 1776%3C/text%3E%3Ctext x='50%25' y='15%25' text-anchor='middle' font-size='28' fill='%23654321' font-family='serif'%3EThe unanimous Declaration%3C/text%3E%3Ctext x='50%25' y='19%25' text-anchor='middle' font-size='28' fill='%23654321' font-family='serif'%3Eof the thirteen united States of America%3C/text%3E%3Ctext x='10%25' y='28%25' font-size='16' fill='%23654321' font-family='serif'%3EWhen in the Course of human events, it becomes necessary for one%3C/text%3E%3Ctext x='10%25' y='31%25' font-size='16' fill='%23654321' font-family='serif'%3Epeople to dissolve the political bands which have connected them with%3C/text%3E%3Ctext x='10%25' y='34%25' font-size='16' fill='%23654321' font-family='serif'%3Eanother, and to assume among the powers of the earth...%3C/text%3E%3Cpath d='M100 400 Q400 380 700 400' stroke='%23654321' fill='none' stroke-width='2'/%3E%3C/svg%3E"
+            },
+            {
+                title: "U.S. Constitution (1787)",
+                description: "The supreme law of the United States, establishing the framework of the federal government and fundamental rights.",
+                img: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect fill='%23e8dcc0' width='800' height='1000'/%3E%3Ctext x='50%25' y='12%25' text-anchor='middle' font-size='40' fill='%23654321' font-family='serif' font-style='italic'%3EWe the People%3C/text%3E%3Ctext x='10%25' y='20%25' font-size='18' fill='%23654321' font-family='serif'%3Eof the United States, in Order to form a more perfect Union,%3C/text%3E%3Ctext x='10%25' y='23%25' font-size='18' fill='%23654321' font-family='serif'%3Eestablish Justice, insure domestic Tranquility, provide for the%3C/text%3E%3Ctext x='10%25' y='26%25' font-size='18' fill='%23654321' font-family='serif'%3Ecommon defence, promote the general Welfare, and secure the%3C/text%3E%3Ctext x='10%25' y='29%25' font-size='18' fill='%23654321' font-family='serif'%3EBlessings of Liberty to ourselves and our Posterity, do ordain%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='18' fill='%23654321' font-family='serif'%3Eand establish this Constitution for the United States of America.%3C/text%3E%3C/svg%3E"
+            },
+            {
+                title: "Bill of Rights (1791)",
+                description: "The first ten amendments to the Constitution, protecting individual liberties and limiting government power.",
+                img: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect fill='%23f0e6d2' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='38' fill='%23654321' font-family='serif' font-weight='bold'%3EBILL OF RIGHTS%3C/text%3E%3Ctext x='50%25' y='14%25' text-anchor='middle' font-size='20' fill='%23654321' font-family='serif'%3EAmendments I-X%3C/text%3E%3Ctext x='10%25' y='22%25' font-size='16' fill='%23654321' font-family='serif' font-weight='bold'%3EAmendment I%3C/text%3E%3Ctext x='10%25' y='25%25' font-size='14' fill='%23654321' font-family='serif'%3ECongress shall make no law respecting an establishment of religion...%3C/text%3E%3Ctext x='10%25' y='32%25' font-size='16' fill='%23654321' font-family='serif' font-weight='bold'%3EAmendment II%3C/text%3E%3Ctext x='10%25' y='35%25' font-size='14' fill='%23654321' font-family='serif'%3EA well regulated Militia, being necessary to the security...%3C/text%3E%3C/svg%3E"
+            },
+            {
+                title: "Articles of Confederation (1781)",
+                description: "The first constitution of the United States, establishing a confederation of sovereign states.",
+                img: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'%3E%3Crect fill='%23ede4c8' width='800' height='1000'/%3E%3Ctext x='50%25' y='10%25' text-anchor='middle' font-size='32' fill='%23654321' font-family='serif' font-weight='bold'%3EArticles of Confederation%3C/text%3E%3Ctext x='50%25' y='14%25' text-anchor='middle' font-size='24' fill='%23654321' font-family='serif'%3Eand Perpetual Union%3C/text%3E%3Ctext x='10%25' y='22%25' font-size='16' fill='%23654321' font-family='serif'%3EArticle I. The Stile of this Confederacy shall be%3C/text%3E%3Ctext x='10%25' y='25%25' font
